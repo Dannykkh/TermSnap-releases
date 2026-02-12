@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">TermSnap</h1>
-<p align="center"><strong>AI 기반 터미널 도우미</strong> — "PuTTY를 더 편하게"</p>
+<p align="center">명령어 몰라도 서버 관리 OK — AI가 자연어를 Linux 명령어로 바꿔주는 SSH + 로컬 통합 터미널</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/platform-Windows%2010+-blue" alt="Platform">
@@ -13,16 +13,17 @@
 
 ---
 
-## 왜 만들었나
+## 이런 불편함, 겪어보셨나요?
 
-서버를 다루다 보면 반복되는 불편함이 있습니다.
+윈도우 사용자로서 PuTTY를 쓸 때마다 Linux 명령어가 생각 안 나서 브라우저를 열었습니다. "nginx 재시작"이라고 치면 AI가 알아서 명령어를 만들어주는 터미널이 있으면 좋겠다고 생각했습니다. 그러다 파일 전송, 여러 서버 탭, 로컬 터미널, AI 코딩 도구까지 한 창에 넣게 됐습니다. 그게 TermSnap입니다.
 
-- **명령어를 매번 검색해야 한다** — nginx 재시작이 `systemctl restart nginx`인지, `service nginx restart`인지 헷갈린다.
-- **PuTTY는 너무 단순하다** — 탭도 없고, 파일 전송하려면 WinSCP를 따로 열어야 한다.
-- **서버가 여러 대면 관리가 복잡하다** — 프로필 저장, 빠른 전환, 상태 모니터링이 필요하다.
-- **로컬 터미널도 따로 쓴다** — PowerShell은 여기, SSH는 저기. 하나로 합치고 싶다.
-
-TermSnap은 이 문제들을 하나의 도구로 해결합니다. **자연어로 말하면 AI가 명령어를 만들어주고**, SSH와 로컬 터미널을 탭 하나로 통합하며, 파일 전송까지 한 화면에서 처리합니다.
+| 불편함 | TermSnap의 해결 |
+|--------|----------------|
+| 명령어가 생각 안 난다 | "nginx 재시작해줘" → AI가 `sudo systemctl restart nginx`로 변환 |
+| PuTTY는 탭도 없다 | 다중 탭 + 서버 프로필 저장 + 원클릭 접속 |
+| 파일 전송은 WinSCP를 따로 연다 | SFTP 파일 전송이 터미널 안에 내장 |
+| 로컬 터미널은 또 따로 쓴다 | SSH + PowerShell + CMD + WSL + Git Bash를 탭 하나로 통합 |
+| 위험한 명령어를 실수로 실행한다 | `rm -rf /`, fork bomb 등 자동 차단 |
 
 ---
 
@@ -36,7 +37,7 @@ TermSnap은 이 문제들을 하나의 도구로 해결합니다. **자연어로
 
 ### 로컬 터미널
 
-PowerShell, CMD, WSL, Git Bash를 지원합니다. Claude Code, Codex, Gemini CLI 같은 AI 도구도 바로 연동됩니다.
+PowerShell, CMD, WSL, Git Bash를 지원합니다. Claude Code, Codex, Gemini CLI 같은 AI 코딩 도구도 바로 연동됩니다.
 
 ![로컬 터미널](images/local-terminal-welcome.png)
 
@@ -54,6 +55,28 @@ PowerShell, CMD, WSL, Git Bash를 지원합니다. Claude Code, Codex, Gemini CL
 
 ---
 
+## 누구를 위한 도구인가
+
+### 1. Linux 명령어를 모르는 서버 관리자
+
+배포할 때마다 명령어를 검색하는 개발자, 서버를 직접 다뤄야 하는 비개발 창업자.
+
+**해결:** 자연어 → Linux 명령어 AI 자동 변환, Q&A 벡터 검색으로 반복 질문 즉시 답변(토큰 절약), `rm -rf /` 등 위험 명령어 자동 차단으로 사고 방지
+
+### 2. PuTTY + WinSCP + 터미널을 따로 쓰는 DevOps
+
+여러 서버를 오가며 관리하는 프리랜서, 소규모 팀.
+
+**해결:** SSH + SFTP + 로컬 터미널 + 파일 탐색기 + 서버 모니터링을 탭 하나로 통합, 서버 프로필 저장으로 원클릭 접속, Port Forwarding 관리
+
+### 3. IDE 없이 가볍게 CLI로 개발하고 싶은 개발자
+
+VS Code가 무거워서 터미널 중심으로 작업하는 사람, 외부에서 모바일로 코딩하려는 사람.
+
+**해결:** AI CLI 내장 연동(Claude Code, Codex, Gemini CLI, Aider), 프로젝트 서브탭으로 멀티 터미널 관리, QR 코드 스캔으로 모바일 원격 접속
+
+---
+
 ## 주요 기능
 
 ### AI 명령어 변환
@@ -64,6 +87,7 @@ PowerShell, CMD, WSL, Git Bash를 지원합니다. Claude Code, Codex, Gemini CL
 - **Q&A 벡터 검색** — 한번 물어본 명령어는 저장되어 다음부터 AI 호출 없이 즉시 답변 (토큰 절약)
 - **하이브리드 검색** — FTS5 키워드 검색 + Embedding 의미 검색을 결합
 - **오류 자동 분석** — 명령어 실행에 실패하면 AI가 원인을 분석하고 수정된 명령어를 제안 (최대 3회 재시도)
+- **Smart Router** — 질문 난이도에 따라 Fast/Balanced/Powerful 모델을 자동 선택
 
 ### SSH 서버 세션
 
@@ -132,7 +156,6 @@ Warp 스타일의 로컬 터미널입니다.
 - **Frontend Engineer Agent** — UI/UX, 웹 개발 전문
 - **Librarian Agent** — 문서 검색, 학습 자료 정리
 - **Oracle Agent** — 복잡한 아키텍처 질문 대응
-- **Smart Router** — 질문 난이도에 따라 Fast/Balanced/Powerful 모델 자동 선택
 
 ### 기타
 
@@ -150,97 +173,100 @@ Warp 스타일의 로컬 터미널입니다.
 <tr>
 <td rowspan="2" width="20%">
 
-### 8. 핵심 파트너십
-- Google (Gemini API)
-- OpenAI (GPT API)
-- Anthropic (Claude API)
-- xAI (Grok API)
-- Renci.SshNet (오픈소스)
-- MaterialDesignThemes
+**Key Partners**
+
+AI API 제공자 — Google(Gemini), OpenAI(GPT), Anthropic(Claude), xAI(Grok), Ollama(로컬 모델)
+
+오픈소스 생태계 — Renci.SshNet, MaterialDesignThemes, Microsoft .NET 8.0/WPF/ConPTY
 
 </td>
 <td width="20%">
 
-### 7. 핵심 활동
-- AI 명령어 변환 엔진 개발
-- 터미널 에뮬레이션 (ConPTY)
-- SSH/SFTP 연결 관리
-- 보안 (DPAPI 암호화, 위험 명령어 차단)
-- Q&A 벡터 검색 최적화
+**Key Activities**
+
+AI 명령어 변환 엔진 — 자연어→Linux 명령어 변환, Q&A 벡터 검색(FTS5+임베딩), 5가지 AI 통합
+
+보안 및 안전장치 — DPAPI 암호화, 위험 명령어 자동 차단, JWT 인증 기반 모바일 접속
 
 </td>
 <td rowspan="2" width="20%">
 
-### 2. 가치 제안
-- 자연어 → 명령어 변환
-- SSH + 로컬 터미널 통합
-- 위험 명령어 자동 차단
-- Q&A 캐싱으로 비용 절약
-- 모바일 원격 접속
-- 프로젝트 단위 관리
-- 5가지 AI 에이전트
+**Value Propositions**
+
+자연어 → Linux 명령어 AI 자동 변환, Q&A 벡터 검색으로 반복 질문 즉시 답변(토큰 절약), 위험 명령어 자동 차단
+
+SSH + SFTP + 로컬 터미널 + 파일 탐색기 + 서버 모니터링을 탭 하나로 통합
+
+AI CLI 내장 연동(Claude Code, Codex, Gemini CLI, Aider), QR 코드 모바일 원격 접속
 
 </td>
 <td width="20%">
 
-### 4. 고객 관계
-- GitHub Issues 피드백
-- 자동 업데이트 알림
-- 사용 통계 대시보드
-- 다국어 지원 (한/영)
+**Customer Relationships**
+
+GitHub Issues 피드백, 자동 업데이트 알림, 다국어 UI(한/영), 다크/라이트 테마, 사용 통계 대시보드
 
 </td>
 <td rowspan="2" width="20%">
 
-### 1. 고객 세그먼트
-- Linux 서버 관리자
-- 명령어에 익숙하지 않은 개발자
-- 여러 서버를 관리하는 DevOps
-- 로컬+원격 통합이 필요한 프리랜서
-- 서버 교육을 받는 학생
+**Customer Segments**
+
+Linux 명령어를 모르는 서버 관리자 — 배포할 때마다 명령어를 검색하는 개발자, 비개발 창업자
+
+PuTTY + WinSCP + 터미널을 따로 쓰는 DevOps — 여러 서버를 관리하는 프리랜서, 소규모 팀
+
+IDE 없이 CLI로 개발하고 싶은 개발자 — 터미널 중심 작업, 모바일 원격 코딩
 
 </td>
 </tr>
 <tr>
 <td>
 
-### 6. 핵심 자원
-- WPF / .NET 8.0
-- ConPTY (로컬 터미널)
-- Renci.SshNet (SSH)
-- SQLite + FTS5 (검색)
-- ONNX 로컬 임베딩 모델
-- Kestrel 웹서버
+**Key Resources**
+
+WPF/.NET 8.0 + ConPTY(로컬 터미널), Renci.SshNet(SSH), SQLite+FTS5(전문검색), ONNX 로컬 임베딩 모델, Kestrel HTTPS 웹서버(모바일)
 
 </td>
 <td>
 
-### 3. 채널
-- GitHub Releases
-- 기술 블로그/커뮤니티
-- QR 코드 모바일 접속
+**Channels**
+
+GitHub Releases(바이너리 배포), QR 코드 모바일 접속(내장 웹서버), 개발자 커뮤니티/기술 블로그
 
 </td>
 </tr>
 <tr>
 <td colspan="2">
 
-### 9. 비용 구조
-- AI API 사용료 (Gemini, OpenAI, Claude, Grok)
-- 개발 시간 (1인 개발)
-- 코드 서명 인증서 (배포 시)
+**Cost Structure**
+
+AI API 호출 비용(Q&A 캐싱으로 80% 절감), 1인 개발(오픈소스 활용으로 외부 비용 최소화), 코드 서명 인증서(Windows 배포)
 
 </td>
 <td colspan="3">
 
-### 5. 수익원
-- **Freemium** — 기본 기능 무료, Pro 기능 유료
-- **Pro 라이선스** — AI 에이전트, 모바일 접속, 고급 모니터링
-- **기업용 라이선스** — 팀 관리, 중앙 설정, 볼륨 라이선스
+**Revenue Streams**
+
+Freemium(기본 기능 무료) + Pro 라이선스(AI 에이전트, 모바일 접속, Smart Router) + 기업용 볼륨 라이선스(팀 관리, 중앙 설정)
 
 </td>
 </tr>
 </table>
+
+---
+
+## 기술 스택
+
+| 영역 | 기술 |
+|------|------|
+| 프레임워크 | WPF, .NET 8.0, C# |
+| UI | MaterialDesignThemes |
+| 터미널 | ConPTY (로컬), SSH ShellStream (원격) |
+| SSH/SFTP | Renci.SshNet (.ppk, .pem 지원) |
+| AI | Gemini, OpenAI, Claude, Grok, Ollama |
+| 검색 | SQLite FTS5 + ONNX 로컬 임베딩 |
+| 웹서버 | Kestrel HTTPS, WebSocket, JWT |
+| 보안 | Windows DPAPI 암호화 |
 
 ---
 
