@@ -2,10 +2,10 @@
 
 AI-powered terminal for Windows. Run Claude Code, Codex, or Gemini CLI on your desktop, then continue coding from your phone.
 
-![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet)
+![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)
 ![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-2.0.0-blue)
+![Version](https://img.shields.io/badge/Version-2.1.0-blue)
 
 **[Korean](README.ko.md)** | English
 
@@ -13,7 +13,7 @@ AI-powered terminal for Windows. Run Claude Code, Codex, or Gemini CLI on your d
 
 ## Code from anywhere
 
-TermSnap 2.0 embeds a web server. Start an AI coding session on your desktop, scan a QR code, and pick up the same session on your phone or tablet. No port forwarding, no cloud relay. Your browser connects directly to the desktop app over your local network.
+TermSnap embeds a web server. Start an AI coding session on your desktop, scan a QR code, and pick up the same session on your phone or tablet. No port forwarding, no cloud relay. Your browser connects directly to the desktop app over your local network.
 
 The web client has two modes:
 
@@ -26,7 +26,7 @@ Ask a question from your phone, watch the AI work on your desktop terminal, read
 
 ## What it does
 
-TermSnap is a terminal that runs AI coding tools (Claude Code, Codex, Gemini CLI) and SSH connections in one window, with mobile access built in.
+TermSnap is a terminal that runs AI coding tools (Claude Code, Codex, Gemini CLI) and SSH connections in one window, with mobile access and security built in.
 
 ### AI coding sessions
 
@@ -66,6 +66,59 @@ Chat mode reads from `conversations/` files that AI CLIs generate. No ANSI parsi
 
 Stream mode forwards raw terminal output. Good for watching builds, tailing logs, or monitoring long-running processes.
 
+### Web dashboard
+
+The Overview page shows active sessions, trusted device count, and recent activity at a glance. Navigate to Sessions to manage connections, or Security to review audit logs and trusted devices.
+
+---
+
+## Device security
+
+TermSnap uses an OAuth2-style device authorization flow for web access.
+
+### How device auth works
+
+1. Your phone requests access from the web login page
+2. TermSnap generates an 8-character code and shows an approval dialog on your desktop
+3. You approve or deny from the desktop app
+4. Once approved, mark the device as trusted for automatic login next time
+
+### Trusted devices
+
+Trusted devices skip the approval step. Each device gets a unique ID and hashed secret stored in a local SQLite database. Devices inactive for 45 days are automatically revoked. You can revoke any device manually from the Security page.
+
+### Security audit
+
+Every authentication attempt is logged: successes, failures, approvals, and denials. The Security page shows recent events with timestamps and IP addresses. Failed login counts are tracked over 24-hour windows.
+
+---
+
+## Project dashboard
+
+The Dashboard tab renders a project overview using data collected from your workspace:
+
+- **File statistics**: extension breakdown, directory structure
+- **Memory summary**: sections and entries from MEMORY.md
+- **Recent conversations**: keyword tags extracted from AI session logs
+- **Server profiles**: saved SSH connections
+- **AI-enhanced mode**: optionally sends project data to Claude or OpenAI for a richer dashboard layout
+
+The dashboard uses a dark-themed card layout with hover effects. When AI generation fails, it falls back to a static HTML template.
+
+---
+
+## Multi-AI orchestration
+
+The Orchestra panel coordinates multiple AI CLIs working on the same project.
+
+### Teams view
+
+Visualizes Claude Code's built-in `teams/` structure. Shows team members, their status (idle or working), assigned tasks, and progress bars. Tasks display dependencies and blocking relationships.
+
+### Orchestrator view
+
+Connects to the MCP orchestrator for PM-Worker pattern workflows. Shows workers, task queues, completion percentages, and recent activity logs. File locks are visible so you know which files are being modified.
+
 ---
 
 ## Desktop features
@@ -92,13 +145,13 @@ ConPTY-based, so vim, htop, and nano work. Supports PowerShell, CMD, WSL, Git Ba
 
 ### Skills and memory
 
-The Skills tab analyzes your project's tech stack and recommends relevant tools. Long-term memory persists in MEMORY.md across sessions. Past conversations are searchable.
+The Skills tab analyzes your project's tech stack and recommends relevant tools. Long-term memory persists in MEMORY.md across sessions. Past conversations are searchable by keyword tags.
 
 ---
 
 ## Install
 
-Requirements: Windows 10/11 (64-bit), .NET 8.0 Runtime
+Requirements: Windows 10/11 (64-bit), .NET 10.0 Runtime
 
 Download from [Releases](https://github.com/Dannykkh/TermSnap-releases/releases), run the installer, open the app.
 
@@ -143,13 +196,14 @@ AI features need an API key (Settings > AI Models). [Gemini](https://ai.google.d
 
 | | |
 |---|---|
-| Framework | .NET 8.0 / WPF |
+| Framework | .NET 10.0 / WPF |
 | Web | ASP.NET Core + SignalR + React |
 | AI | Claude Code, Codex, Gemini CLI, Gemini/OpenAI/Claude/Grok API |
 | SSH/SFTP | SSH.NET |
 | Editor | AvalonEdit |
 | UI | Material Design In XAML |
 | Terminal | ConPTY |
+| Device Auth | SQLite + SHA256 |
 
 ---
 
