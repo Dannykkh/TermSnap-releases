@@ -5,7 +5,7 @@ AI-powered terminal for Windows. Run Claude Code, Codex, or Gemini CLI on your d
 ![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)
 ![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows)
 ![License](https://img.shields.io/badge/License-Proprietary-red)
-![Version](https://img.shields.io/badge/Version-2.1.0-blue)
+![Version](https://img.shields.io/badge/Version-2.1.1-blue)
 
 **[Korean](README.ko.md)** | English
 
