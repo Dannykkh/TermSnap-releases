@@ -1,6 +1,6 @@
 # TermSnap
 
-##Service Site : http://melstalk.myukai.com/
+*Service Site : http://melstalk.myukai.com/ *
 
 
 AI-powered terminal for Windows. Run Claude Code, Codex, or Gemini CLI on your desktop, then continue coding from your phone.
