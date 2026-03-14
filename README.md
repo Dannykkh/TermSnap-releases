@@ -1,164 +1,256 @@
 # TermSnap
 
-**Service Site : http://melstalk.myukai.com/**
+> **Service Site : http://melstalk.myukai.com/**
 
+> 🌐 Language: **English** | [한국어](https://github.com/Dannykkh/TermSnap/blob/master/README.ko.md)
 
-AI-powered terminal for Windows. Run Claude Code, Codex, or Gemini CLI on your desktop, then continue coding from your phone.
+<p align="center">
+  <img src="guide/images/hero.png" width="1000">
+</p>
 
-![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)
-![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows)
-![License](https://img.shields.io/badge/License-Proprietary-red)
-![Version](https://img.shields.io/badge/Version-3.8.6-blue)
+> **AI Workstation for AI Coding Agents**
 
-**[Korean](README.ko.md)** | English
+TermSnap is an AI workstation designed to orchestrate multiple AI coding agents across the entire developer environment.
 
----
+Instead of embedding a single AI assistant inside an IDE, TermSnap coordinates systems such as **Claude Code, Codex CLI, Gemini CLI, and Aider** across terminals, desktop applications, and remote systems.
 
-## Code from anywhere
-
-TermSnap embeds a web server. Start an AI coding session on your desktop, scan a QR code, and pick up the same session on your phone or tablet. No port forwarding, no cloud relay. Your browser connects directly to the desktop app over your local network.
-
-The web client has two modes:
-
-- **Stream**: raw terminal output forwarded to your mobile browser in real time
-- **Chat**: clean conversation bubbles parsed from the AI's response files, so you read structured answers instead of raw VT100 escape codes
-
-Ask a question from your phone, watch the AI work on your desktop terminal, read the formatted answer on your phone. Works with Claude Code, Codex, and Gemini CLI.
+The goal is to explore a new model of **AI-native developer infrastructure** where multiple AI agents collaborate inside real development workflows.
 
 ---
 
-## What it does
+## AI IDE → AI Workstation
 
-TermSnap is a terminal that runs AI coding tools (Claude Code, Codex, Gemini CLI) and SSH connections in one window, with mobile access and security built in.
+<p align="center">
+  <img src="guide/images/ai-workstation-evolution.png" width="900">
+</p>
 
-### AI coding sessions
+Most modern tools embed AI inside an IDE.
 
-Open a project folder and start Claude Code, Codex, or Gemini CLI as sub-tabs inside a single project tab. Run PowerShell alongside them. The file explorer stays pinned to the project. Open files in VS Code or Cursor directly from the tree.
+Examples:
+- Cursor
+- Copilot
+- Windsurf
 
-### SSH with AI commands
+These systems operate **only inside the editor**.
 
-Connect to servers and ask in plain language:
+TermSnap explores a different model.
 
-```
-You type:  "restart nginx"
-AI returns: sudo systemctl restart nginx
-```
+|  | AI IDE | TermSnap |
+|---|---|---|
+| Scope | Code editor | Entire developer workstation |
+| AI role | Assistant | Multiple collaborating agents |
+| Environment | IDE | Terminal + Desktop + Remote |
+| Automation | Code tasks | System-level workflows |
+| Coordination | Inline prompts | AI agent orchestration |
 
-Commands are cached. Ask the same thing twice and TermSnap returns the cached answer without an API call. Dangerous commands like `rm -rf /` are blocked. SFTP is built in with 4 parallel streams.
-
-### System monitoring
-
-The footer shows system-wide CPU, memory, and GPU stats in real time. Hover for details including GPU temperature and VRAM. When your computer feels slow, check the footer.
-
----
-
-## Mobile web client
-
-### How it works
-
-1. Click the mobile icon in TermSnap's toolbar
-2. Scan the QR code with your phone
-3. Pick a terminal session to connect to
-4. Choose Stream (raw terminal) or Chat (formatted AI responses)
-
-### Chat mode
-
-Chat mode reads from `conversations/` files that AI CLIs generate. No ANSI parsing, no noise. You see clean markdown-formatted answers with a chat bubble UI. Type a question, watch the spinner, read the answer.
-
-### Stream mode
-
-Stream mode forwards raw terminal output. Good for watching builds, tailing logs, or monitoring long-running processes.
-
-### Web dashboard
-
-The Overview page shows active sessions, trusted device count, and recent activity at a glance. Navigate to Sessions to manage connections, or Security to review audit logs and trusted devices.
+TermSnap treats the **developer workstation itself as the AI platform**.
 
 ---
 
-## Device security
+## Architecture
 
-TermSnap uses an OAuth2-style device authorization flow for web access.
+<p align="center">
+  <img src="guide/images/termsnap-architecture.svg" width="1000">
+</p>
 
-### How device auth works
+TermSnap is built around a **4-layer AI workstation architecture**.
 
-1. Your phone requests access from the web login page
-2. TermSnap generates an 8-character code and shows an approval dialog on your desktop
-3. You approve or deny from the desktop app
-4. Once approved, mark the device as trusted for automatic login next time
+| Layer | Component | Purpose |
+|---|---|---|
+| L1 | Terminal IDE | Local shells, SSH sessions, AI CLI environments |
+| L2 | Mobile Web Client | Continue sessions from phone or tablet |
+| L3 | Window Agent | AI-driven desktop automation |
+| L4 | Remote Desktop | Live workstation streaming with AI vision |
 
-### Trusted devices
-
-Trusted devices skip the approval step. Each device gets a unique ID and hashed secret stored in a local SQLite database. Devices inactive for 45 days are automatically revoked. You can revoke any device manually from the Security page.
-
-### Security audit
-
-Every authentication attempt is logged: successes, failures, approvals, and denials. The Security page shows recent events with timestamps and IP addresses. Failed login counts are tracked over 24-hour windows.
+Each layer expands the scope of AI assistance beyond the traditional IDE.
 
 ---
 
-## Project dashboard
+## Screenshots
 
-The Dashboard tab renders a project overview using data collected from your workspace:
+### Terminal IDE
 
-- **File statistics**: extension breakdown, directory structure
-- **Memory summary**: sections and entries from MEMORY.md
-- **Recent conversations**: keyword tags extracted from AI session logs
-- **Server profiles**: saved SSH connections
-- **AI-enhanced mode**: optionally sends project data to Claude or OpenAI for a richer dashboard layout
+<p align="center">
+  <img src="guide/images/terminal-ide.png" width="900">
+</p>
 
-The dashboard uses a dark-themed card layout with hover effects. When AI generation fails, it falls back to a static HTML template.
+Run multiple AI coding assistants inside a single workspace.
 
----
+Supported tools include:
+- Claude Code
+- Codex CLI
+- Gemini CLI
+- Aider
 
-## Multi-AI orchestration
-
-The Orchestra panel coordinates multiple AI CLIs working on the same project.
-
-### Teams view
-
-Visualizes Claude Code's built-in `teams/` structure. Shows team members, their status (idle or working), assigned tasks, and progress bars. Tasks display dependencies and blocking relationships.
-
-### Orchestrator view
-
-Connects to the MCP orchestrator for PM-Worker pattern workflows. Shows workers, task queues, completion percentages, and recent activity logs. File locks are visible so you know which files are being modified.
+All sessions share the same terminal environment and project context.
 
 ---
 
-## Desktop features
+### Mobile Web Client
 
-### Tabs inside tabs
+<p align="center">
+  <img src="guide/images/mobile-client.png" width="600">
+</p>
 
-One project tab holds multiple sub-tabs: PowerShell, Claude Code, Gemini CLI. Drag to reorder. Close the app, reopen it, everything comes back.
+Continue development sessions from mobile devices.
 
-### File editor
+Features include:
+- QR device pairing
+- terminal access
+- AI chat mode
+- session monitoring
+- remote approvals
 
-Built on AvalonEdit. Syntax highlighting for 20+ languages, code folding, find/replace. Read-only by default, Ctrl+E to edit.
+---
 
-### Terminal engine
+### Window Agent
 
-ConPTY-based, so vim, htop, and nano work. Supports PowerShell, CMD, WSL, Git Bash. GPU-accelerated rendering at 30fps with per-line caching.
+<p align="center">
+  <img src="guide/images/window-agent.png" width="900">
+</p>
 
-### SSH features
+The Window Agent allows AI systems to interact with desktop applications.
 
-- AI command generation with hybrid RAG search and smart model routing
-- Error analysis with auto-retry (up to 3 attempts)
-- Server monitoring: CPU, memory, disk, network, top processes
-- Port forwarding: Local, Remote, Dynamic (SOCKS)
-- SFTP: 256KB buffers, 4 concurrent streams
+Capabilities include:
+- window capture
+- UI automation
+- mouse / keyboard injection
+- Chrome DevTools automation
 
-### Skills and memory
+---
 
-The Skills tab analyzes your project's tech stack and recommends relevant tools. Long-term memory persists in MEMORY.md across sessions. Past conversations are searchable by keyword tags.
+### Remote Desktop
+
+<p align="center">
+  <img src="guide/images/remote-desktop.png" width="900">
+</p>
+
+Stream the entire workstation using WebRTC.
+
+Features:
+- GPU-level screen capture
+- low latency streaming
+- multi-monitor support
+- AI vision verification
+
+---
+
+## Why TermSnap
+
+AI coding tools are powerful but fragmented.
+
+Developers often use multiple systems at once:
+- terminal tools
+- SSH sessions
+- browsers
+- desktop apps
+- multiple AI assistants
+
+TermSnap provides a unified workstation where these systems collaborate inside real development workflows.
+
+---
+
+## AI Agent Orchestration
+
+TermSnap allows multiple AI systems to collaborate.
+
+Example workflow:
+
+1. **Claude Code** proposes architecture
+2. **Codex CLI** generates implementation
+3. **Gemini CLI** validates edge cases
+4. **Aider** applies repository edits
+
+TermSnap coordinates these agents inside a shared environment.
+
+---
+
+## Level 1 — Terminal IDE
+
+The core workspace for development.
+
+Features include:
+- ConPTY terminal
+- SSH sessions
+- project tabs
+- AI CLI sub-tabs
+- command catalog
+- prompt history
+- markdown preview
+- system monitor
+
+---
+
+## Level 2 — Mobile Web Client
+
+TermSnap embeds a web server so development sessions can be accessed remotely.
+
+Features:
+- QR device pairing
+- terminal streaming
+- chat interface
+- device trust system
+- audit logs
+- push notifications
+
+---
+
+## Level 3 — Window Agent
+
+The Window Agent allows AI systems to observe and control desktop applications.
+
+Technologies:
+- Win32 API
+- Windows UI Automation
+- Chrome DevTools Protocol
+
+Capabilities:
+- window capture
+- automated input
+- browser automation
+- application workflows
+
+---
+
+## Level 4 — Remote Desktop
+
+Remote Desktop streams the full workstation through WebRTC.
+
+Technologies:
+- DXGI Desktop Duplication
+- WebRTC
+- AI vision analysis
+
+---
+
+## Tech Stack
+
+| Category | Technology |
+|---|---|
+| Framework | .NET / WPF |
+| Web | ASP.NET Core + React + SignalR |
+| Terminal | ConPTY |
+| SSH | SSH.NET |
+| Desktop Automation | Win32 API + UI Automation |
+| Browser Automation | Chrome DevTools Protocol |
+| Streaming | WebRTC |
+| Editor | AvalonEdit |
+| Voice | Whisper API + sherpa-onnx |
+| Storage | SQLite |
 
 ---
 
 ## Install
 
-Requirements: Windows 10/11 (64-bit), .NET 10.0 Runtime
+Requirements:
+- Windows 10 / 11
+- .NET 10 Runtime
 
-Download from [Releases](https://github.com/Dannykkh/TermSnap-releases/releases), run the installer, open the app.
+Download the latest installer from [Releases](https://github.com/Dannykkh/TermSnap-releases/releases).
 
-### Build from source
+---
+
+## Build From Source
 
 ```bash
 git clone https://github.com/Dannykkh/TermSnap.git
@@ -167,58 +259,46 @@ dotnet build
 dotnet run --project src/TermSnap/TermSnap.csproj
 ```
 
-AI features need an API key (Settings > AI Models). [Gemini](https://ai.google.dev/) has a free tier. SSH, SFTP, and local terminals work without one.
+### Web Client (optional, frontend only)
+
+If you are working on the mobile web client independently:
+
+```bash
+cd src/TermSnap/WebClient
+npm install
+npm run dev
+```
 
 ---
 
-## Quick start
+## Project Status
 
-1. Settings > AI Models > paste your API key
-2. New Tab > Local Terminal > open a project folder
-3. Add sub-tabs: Claude Code, Codex, or Gemini CLI
-4. Click the mobile icon > scan QR > code from your phone
+- Solo developed
+- 200+ commits
+- Active releases
+- 4-layer architecture implemented
 
----
-
-## Keyboard shortcuts
-
-| Shortcut | Action |
-|----------|--------|
-| Ctrl+L | New local terminal |
-| Ctrl+T | New SSH connection |
-| Ctrl+Tab | Next tab |
-| Ctrl+W | Close tab |
-| Ctrl+Shift+N | New sub-tab |
-| Ctrl+Shift+P | Command palette |
-| Ctrl+E | Toggle edit mode |
-| Ctrl+S | Save file |
+For architecture and workflow details:
+- [AI Workflow Guide (English)](https://github.com/Dannykkh/TermSnap/blob/master/guide/AI_WORKFLOW_GUIDE.md)
+- [AI Workflow Guide (Korean)](https://github.com/Dannykkh/TermSnap/blob/master/guide/AI_WORKFLOW_GUIDE.ko.md)
+- [Architecture Decision Records](https://github.com/Dannykkh/TermSnap/tree/master/guide/adr)
 
 ---
 
-## Tech stack
+## Vision
 
-| | |
-|---|---|
-| Framework | .NET 10.0 / WPF |
-| Web | ASP.NET Core + SignalR + React |
-| AI | Claude Code, Codex, Gemini CLI, Gemini/OpenAI/Claude/Grok API |
-| SSH/SFTP | SSH.NET |
-| Editor | AvalonEdit |
-| UI | Material Design In XAML |
-| Terminal | ConPTY |
-| Device Auth | SQLite + SHA256 |
+TermSnap explores the concept of an **AI-native developer workstation**.
+
+The long-term goal is to build an open platform where **multiple AI coding agents collaborate inside real development environments**.
 
 ---
 
-## Docs
+## Contributing
 
-- [AI workflow guide](docs/AI_WORKFLOW_GUIDE.md)
-- [Local terminal guide](docs/LOCAL_TERMINAL_GUIDE.md)
-- [SSH session guide](docs/SSH_SESSION_GUIDE.md)
-- [Full user guide](docs/USER_GUIDE.md)
+Issues and pull requests are welcome.
 
 ---
 
 ## License
 
-Proprietary. Personal, non-commercial use only. See [LICENSE](LICENSE) for details.
+Proprietary — personal and non-commercial use only.
