@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="980" viewBox="0 0 1400 980" role="img" aria-labelledby="title desc">
+  <title id="title">TermSnap Architecture</title>
+  <desc id="desc">A 4-layer architecture diagram for the TermSnap AI workstation.</desc>
+  <style>
+    .bg { fill: #0f172a; }
+    .panel { fill: #111827; stroke: #334155; stroke-width: 2; rx: 18; }
+    .layer { fill: #1f2937; stroke: #475569; stroke-width: 2; rx: 18; }
+    .accent { fill: #0b1220; stroke: #60a5fa; stroke-width: 2.5; rx: 16; }
+    .mini { fill: #111827; stroke: #64748b; stroke-width: 1.5; rx: 12; }
+    .title { font: 700 42px Arial, Helvetica, sans-serif; fill: #f8fafc; }
+    .subtitle { font: 400 22px Arial, Helvetica, sans-serif; fill: #cbd5e1; }
+    .section { font: 700 28px Arial, Helvetica, sans-serif; fill: #e2e8f0; }
+    .layerTitle { font: 700 26px Arial, Helvetica, sans-serif; fill: #f8fafc; }
+    .body { font: 400 18px Arial, Helvetica, sans-serif; fill: #cbd5e1; }
+    .small { font: 400 16px Arial, Helvetica, sans-serif; fill: #94a3b8; }
+    .chip { fill: #172554; stroke: #3b82f6; stroke-width: 1.5; rx: 14; }
+    .chipText { font: 600 16px Arial, Helvetica, sans-serif; fill: #dbeafe; }
+    .arrow { stroke: #60a5fa; stroke-width: 4; fill: none; marker-end: url(#arrowhead); opacity: 0.9; }
+  </style>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="#60a5fa"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1400" height="980"/>
+
+  <text x="70" y="72" class="title">TermSnap</text>
+  <text x="70" y="108" class="subtitle">AI Workstation for AI Coding Agents</text>
+  <text x="70" y="142" class="subtitle">Terminal workflows + desktop automation + remote environments + agent orchestration</text>
+
+  <rect x="70" y="180" width="1260" height="730" class="panel"/>
+
+  <rect x="95" y="210" width="290" height="670" class="accent"/>
+  <text x="120" y="250" class="section">Core Model</text>
+  <text x="120" y="292" class="body">TermSnap coordinates multiple</text>
+  <text x="120" y="320" class="body">AI coding agents across the</text>
+  <text x="120" y="348" class="body">entire developer environment,</text>
+  <text x="120" y="376" class="body">not just inside one IDE.</text>
+
+  <rect x="120" y="412" width="240" height="64" class="chip"/>
+  <text x="140" y="451" class="chipText">Claude Code</text>
+
+  <rect x="120" y="492" width="240" height="64" class="chip"/>
+  <text x="140" y="531" class="chipText">Codex CLI</text>
+
+  <rect x="120" y="572" width="240" height="64" class="chip"/>
+  <text x="140" y="611" class="chipText">Gemini CLI</text>
+
+  <rect x="120" y="652" width="240" height="64" class="chip"/>
+  <text x="140" y="691" class="chipText">Aider / Other Agents</text>
+
+  <text x="120" y="760" class="body">Shared project context,</text>
+  <text x="120" y="788" class="body">workflow continuity, approvals,</text>
+  <text x="120" y="816" class="body">and UI-based coordination.</text>
+
+  <rect x="430" y="220" width="860" height="130" class="layer"/>
+  <text x="460" y="265" class="layerTitle">L1 — Terminal IDE</text>
+  <text x="460" y="298" class="body">Local shells, SSH, AI CLI sessions, file explorer, project memory</text>
+  <rect x="995" y="245" width="250" height="78" class="mini"/>
+  <text x="1018" y="278" class="body">ConPTY</text>
+  <text x="1018" y="304" class="body">SSH.NET</text>
+
+  <rect x="430" y="375" width="860" height="130" class="layer"/>
+  <text x="460" y="420" class="layerTitle">L2 — Mobile Web Client</text>
+  <text x="460" y="453" class="body">QR pairing, remote session access, web terminal, device auth, push alerts</text>
+  <rect x="995" y="400" width="250" height="78" class="mini"/>
+  <text x="1018" y="433" class="body">ASP.NET Core</text>
+  <text x="1018" y="459" class="body">SignalR + React</text>
+
+  <rect x="430" y="530" width="860" height="130" class="layer"/>
+  <text x="460" y="575" class="layerTitle">L3 — Window Agent</text>
+  <text x="460" y="608" class="body">Window capture, UI automation, input injection, Chrome CDP</text>
+  <rect x="995" y="555" width="250" height="78" class="mini"/>
+  <text x="1018" y="588" class="body">Win32 API</text>
+  <text x="1018" y="614" class="body">UIA + Chrome CDP</text>
+
+  <rect x="430" y="685" width="860" height="130" class="layer"/>
+  <text x="460" y="730" class="layerTitle">L4 — Remote Desktop</text>
+  <text x="460" y="763" class="body">GPU capture, WebRTC streaming, AI vision verification, multi-monitor support</text>
+  <rect x="995" y="710" width="250" height="78" class="mini"/>
+  <text x="1018" y="743" class="body">DXGI</text>
+  <text x="1018" y="769" class="body">WebRTC</text>
+
+  <path d="M 860 350 L 860 375" class="arrow"/>
+  <path d="M 860 505 L 860 530" class="arrow"/>
+  <path d="M 860 660 L 860 685" class="arrow"/>
+
+  <text x="70" y="948" class="small">Positioning: AI workstation for orchestrating multiple AI coding agents across terminal, desktop, and remote workflows.</text>
+</svg>
