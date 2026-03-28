@@ -8,6 +8,14 @@
   <img src="guide/images/hero.png" width="1000">
 </p>
 
+<p align="center">
+  <a href="https://youtu.be/bQlgH8I95jU">
+    <img src="https://img.youtube.com/vi/bQlgH8I95jU/maxresdefault.jpg" width="600" alt="TermSnap Demo Video">
+  </a>
+  <br>
+  <a href="https://youtu.be/bQlgH8I95jU">▶ Watch Demo Video</a>
+</p>
+
 > **AI Workstation for AI Coding Agents**
 
 TermSnap is an AI workstation designed to orchestrate multiple AI coding agents across the entire developer environment.
