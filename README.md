@@ -2,18 +2,18 @@
 
 > **Service Site : http://melstalk.myukai.com/**
 
-> 🌐 Language: **English** | [한국어](https://github.com/Dannykkh/TermSnap/blob/master/README.ko.md)
-
-<p align="center">
-  <img src="guide/images/hero.png" width="1000">
-</p>
-
 <p align="center">
   <a href="https://youtu.be/bQlgH8I95jU">
     <img src="https://img.youtube.com/vi/bQlgH8I95jU/maxresdefault.jpg" width="600" alt="TermSnap Demo Video">
   </a>
   <br>
   <a href="https://youtu.be/bQlgH8I95jU">▶ Watch Demo Video</a>
+</p>
+
+> 🌐 Language: **English** | [한국어](https://github.com/Dannykkh/TermSnap/blob/master/README.ko.md)
+
+<p align="center">
+  <img src="guide/images/hero.png" width="1000">
 </p>
 
 > **AI Workstation for AI Coding Agents**
